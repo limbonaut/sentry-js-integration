@@ -5,29 +5,33 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = -1
-offset_left = 345.0
-offset_top = 260.0
-offset_right = 445.0
-offset_bottom = 283.0
-text = "Hello, World!"
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 72.0
+offset_top = 116.0
+offset_right = 231.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
 
-[node name="CaptureMessageBtn" type="Button" parent="."]
-anchors_preset = -1
-offset_left = 335.0
-offset_top = 322.0
-offset_right = 477.0
-offset_bottom = 353.0
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sentry JS Integration"
+
+[node name="SetContextBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Set context
+"
+
+[node name="CaptureMessageBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
 text = "Capture message"
 
-[node name="CrashApp" type="Button" parent="."]
-anchors_preset = -1
-offset_left = 334.0
-offset_top = 383.0
-offset_right = 421.0
-offset_bottom = 414.0
-text = "Crash App"
-
-[connection signal="pressed" from="CaptureMessageBtn" to="." method="_on_capture_message_btn_pressed"]
-[connection signal="pressed" from="CrashApp" to="." method="_on_crash_app_pressed"]
+[connection signal="pressed" from="VBoxContainer/SetContextBtn" to="." method="_on_set_context_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/CaptureMessageBtn" to="." method="_on_capture_message_btn_pressed"]
