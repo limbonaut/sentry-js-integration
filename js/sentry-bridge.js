@@ -1,4 +1,19 @@
-window.SentryGodot = {
+window.SentryBridge = {
+	initialize: function (dsn, release) {
+		if (window.Sentry) {
+			Sentry.init({
+				dsn: dsn,
+				release: release,
+				integrations: [],
+				sampleRate: 1.0,
+				debug: true,
+			});
+			console.log("Sentry initialized dynamically!");
+		} else {
+			console.error("Sentry SDK not loaded after script injection");
+		}
+	},
+
 	setContext: function (key, valueJson) {
 		try {
 			var value = JSON.parse(valueJson);
@@ -7,6 +22,10 @@ window.SentryGodot = {
 		} catch (e) {
 			console.error("Failed to parse context JSON:", e);
 		}
+	},
+
+	captureMessage: function (message) {
+		Sentry.captureMessage(message);
 	},
 
 	captureError: function (message, stacktraceJson) {

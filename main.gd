@@ -1,44 +1,26 @@
 extends Node2D
+## Example of Sentry JS integration in Godot.
+##
+## ATTENTION: Must add this to `html/head_include` in the export options:
+##
+##   <script src="sentry.js" crossorigin="anonymous"></script>
+##   <script src="sentry-bridge.js" crossorigin="anonymous"></script>
 
 
-var SentryJS: JavaScriptObject
+# Sentry options
+const DSN := "https://3f1e095cf2e14598a0bd5b4ff324f712@o447951.ingest.us.sentry.io/6680910"
+const RELEASE := "sentry-godot-web-test@1.0.0-alpha.3"
+
+var SentryBridge: JavaScriptObject
 
 
 func _ready():
-	_add_utility_functions()
-	_load_js_script("sentry-godot.js")
-	_load_js_script("sentry-init.js")
-
-	# Test utility functions
-	JavaScriptBridge.eval("helloWorld();")
+	_initialize_sentry()
 
 
-func _add_utility_functions() -> void:
-	JavaScriptBridge.eval("""
-		window.loadScript = function(src, onload) {
-			var script = document.createElement('script');
-			script.src = src;
-			script.crossOrigin = 'anonymous';
-			script.onload = onload;
-			script.onerror = function() {
-				console.error('Failed to load ' + src);
-			};
-			document.head.appendChild(script);
-	    };
-
-		window.helloWorld = function() {
-			console.log("Hello, world!");
-		};
-
-	""")
-
-
-func _load_js_script(p_script: String) -> void:
-	JavaScriptBridge.eval("""
-		loadScript("%s", function() {
-			console.log("Loaded %s.");
-		});
-	""" % [p_script, p_script], true)
+func _initialize_sentry() -> void:
+	SentryBridge = JavaScriptBridge.get_interface("SentryBridge")
+	SentryBridge.initialize(DSN, RELEASE)
 
 
 func _on_set_context_btn_pressed() -> void:
@@ -46,18 +28,15 @@ func _on_set_context_btn_pressed() -> void:
 	var ctx := {
 		"hello": "world",
 		"gesture": "wave"
+
 	}
-	var SentryGodot: JavaScriptObject = JavaScriptBridge.get_interface("SentryGodot")
-	SentryGodot.setContext("ctx", JSON.stringify(ctx))
+
+	SentryBridge.setContext("ctx", JSON.stringify(ctx))
 
 
 func _on_capture_message_btn_pressed() -> void:
-	# Get JS Sentry interface
-	SentryJS = JavaScriptBridge.get_interface("Sentry")
-	print("DEBUG: Got interface: ", SentryJS)
-
 	# Capture message
-	SentryJS.captureMessage("Hello from GDScript")
+	SentryBridge.captureMessage("Hello from GDScript")
 
 
 func _on_capture_error_test_pressed() -> void:
@@ -79,5 +58,4 @@ func _on_capture_error_test_pressed() -> void:
 		]
 	}
 
-	var SentryGodot: JavaScriptObject = JavaScriptBridge.get_interface("SentryGodot")
-	SentryGodot.captureError("Error test", JSON.stringify(stacktrace))
+	SentryBridge.captureError("Error test", JSON.stringify(stacktrace))
