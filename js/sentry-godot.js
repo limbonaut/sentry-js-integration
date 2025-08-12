@@ -8,4 +8,17 @@ window.SentryGodot = {
 			console.error("Failed to parse context JSON:", e);
 		}
 	},
+
+	captureError: function (message, stacktraceJson) {
+		try {
+			var stacktrace = JSON.parse(stacktraceJson);
+			Sentry.captureEvent({
+				message: message,
+				stacktrace: stacktrace,
+			});
+			console.log("Event captured!");
+		} catch (e) {
+			console.error("Failed to capture event: ", e);
+		}
+	},
 };

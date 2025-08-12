@@ -58,3 +58,26 @@ func _on_capture_message_btn_pressed() -> void:
 
 	# Capture message
 	SentryJS.captureMessage("Hello from GDScript")
+
+
+func _on_capture_error_test_pressed() -> void:
+	# Create stacktrace data
+	var stacktrace := {
+		frames = [
+			{
+				filename = "player/damage.gd",
+				function = "_on_area_entered",
+				lineno = 12,
+				in_app = true
+			},
+			{
+				filename = "player/damage.gd",
+				function = "_take_damage",
+				lineno = 5,
+				in_app = true
+			},
+		]
+	}
+
+	var SentryGodot: JavaScriptObject = JavaScriptBridge.get_interface("SentryGodot")
+	SentryGodot.captureError("Error test", JSON.stringify(stacktrace))

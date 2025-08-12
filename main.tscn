@@ -33,5 +33,10 @@ text = "Set context
 layout_mode = 2
 text = "Capture message"
 
+[node name="CaptureErrorTest" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Capture error"
+
 [connection signal="pressed" from="VBoxContainer/SetContextBtn" to="." method="_on_set_context_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/CaptureMessageBtn" to="." method="_on_capture_message_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/CaptureErrorTest" to="." method="_on_capture_error_test_pressed"]
