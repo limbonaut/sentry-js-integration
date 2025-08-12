@@ -8,9 +8,9 @@ window.SentryBridge = {
 				sampleRate: 1.0,
 				debug: true,
 			});
-			console.log("Sentry initialized dynamically!");
+			console.log("Sentry initialized via bridge");
 		} else {
-			console.error("Sentry SDK not loaded after script injection");
+			console.error("Sentry Javascript SDK not found!");
 		}
 	},
 
@@ -26,6 +26,7 @@ window.SentryBridge = {
 
 	captureMessage: function (message) {
 		Sentry.captureMessage(message);
+		console.log("Message captured.");
 	},
 
 	captureError: function (message, stacktraceJson) {
@@ -35,9 +36,9 @@ window.SentryBridge = {
 				message: message,
 				stacktrace: stacktrace,
 			});
-			console.log("Event captured!");
+			console.log("Error captured.");
 		} catch (e) {
-			console.error("Failed to capture event: ", e);
+			console.error("Failed to capture event:", e);
 		}
 	},
 };
