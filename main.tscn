@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bufm1gotc1q1s"]
+
+[ext_resource type="Script" uid="uid://5n1i3ijw3upo" path="res://main.gd" id="1_ig7tw"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+offset_left = 345.0
+offset_top = 260.0
+offset_right = 445.0
+offset_bottom = 283.0
+text = "Hello, World!"
+
+[node name="CaptureMessageBtn" type="Button" parent="."]
+anchors_preset = -1
+offset_left = 335.0
+offset_top = 322.0
+offset_right = 477.0
+offset_bottom = 353.0
+text = "Capture message"
+
+[node name="CrashApp" type="Button" parent="."]
+anchors_preset = -1
+offset_left = 334.0
+offset_top = 383.0
+offset_right = 421.0
+offset_bottom = 414.0
+text = "Crash App"
+
+[connection signal="pressed" from="CaptureMessageBtn" to="." method="_on_capture_message_btn_pressed"]
+[connection signal="pressed" from="CrashApp" to="." method="_on_crash_app_pressed"]
