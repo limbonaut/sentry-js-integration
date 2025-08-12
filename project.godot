@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="JS Test Integration"
+config/name="Sentry JS Integration"
 run/main_scene="uid://bufm1gotc1q1s"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
