@@ -1,8 +1,10 @@
 @tool
 extends EditorPlugin
+## Registers export plugin that copies JS dependecies.
 
 
 var _export_plugin: EditorExportPlugin
+
 
 func _enter_tree() -> void:
 	_enable_plugin()
@@ -19,6 +21,8 @@ func _disable_plugin() -> void:
 
 
 class SentryJS_ExportPlugin extends EditorExportPlugin:
+	## Copies JavaScript dependencies to exported directory.
+
 	const JS_FOLDER = "res://js/"
 
 

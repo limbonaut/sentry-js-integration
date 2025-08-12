@@ -6,8 +6,8 @@ var SentryJS: JavaScriptObject
 
 func _ready():
 	_add_utility_functions()
-	_add_interface()
-	_init_sentry()
+	_load_js_script("sentry-godot.js")
+	_load_js_script("sentry-init.js")
 
 
 func _add_utility_functions() -> void:
@@ -30,48 +30,12 @@ func _add_utility_functions() -> void:
 	""")
 
 
-func _add_interface() -> void:
+func _load_js_script(p_script: String) -> void:
 	JavaScriptBridge.eval("""
-		window.SentryGodot = {
-
-			setContext: function(key, valueJson) {
-				try {
-					var value = JSON.parse(valueJson);
-					Sentry.setContext(key, value);
-					console.log("Context set:", key, value);
-				} catch (e) {
-					console.error("Failed to parse context JSON:", e);
-				}
-			}
-
-		};
-	""")
-
-
-func _init_sentry() -> void:
-	JavaScriptBridge.eval("""
-		loadScript('sentry.js', function() {
-			console.log('Sentry SDK loaded');
-
-			loadScript('sentry-godot.js', function() {
-				console.log('sentry-godot script loaded');
-			});
-
-			if (window.Sentry) {
-				Sentry.init({
-					dsn: 'https://3f1e095cf2e14598a0bd5b4ff324f712@o447951.ingest.us.sentry.io/6680910',
-					release: 'sentry-godot-web-test@1.0.0-alpha.3',
-					integrations: [],
-					tracesSampleRate: 1.0,
-					debug: true
-				});
-				console.log('Sentry initialized dynamically!');
-			} else {
-				console.error('Sentry SDK not loaded after script injection');
-			}
+		loadScript("%s", function() {
+			console.log("Loaded %s.");
 		});
-
-	""", true)
+	""" % [p_script, p_script], true)
 
 
 func _on_capture_message_btn_pressed() -> void:
