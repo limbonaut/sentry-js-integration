@@ -10,7 +10,7 @@ window.SentryBridge = {
 			});
 			console.log("Sentry initialized via bridge");
 		} else {
-			console.error("Sentry Javascript SDK not found!");
+			console.error("Sentry JavaScript SDK not found!");
 		}
 	},
 
