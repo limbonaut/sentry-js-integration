@@ -7,6 +7,7 @@ window.SentryBridge = {
 				integrations: [],
 				sampleRate: 1.0,
 				debug: true,
+				enableLogs: true,
 				integrations: [window.Sentry.wasmIntegration()],
 			});
 			console.log("Sentry initialized via bridge");
