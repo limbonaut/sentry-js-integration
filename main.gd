@@ -1,10 +1,6 @@
 extends Node2D
 ## Example of Sentry JS integration in Godot.
 ##
-## ATTENTION: Must add this to `html/head_include` in the export options:
-##
-##   <script src="sentry.js" crossorigin="anonymous"></script>
-##   <script src="sentry-bridge.js" crossorigin="anonymous"></script>
 
 
 # Sentry options
@@ -28,18 +24,21 @@ func _on_set_context_btn_pressed() -> void:
 	var ctx := {
 		"hello": "world",
 		"gesture": "wave"
-
 	}
 
 	SentryBridge.setContext("ctx", JSON.stringify(ctx))
 
 
 func _on_capture_message_btn_pressed() -> void:
+	print("Capturing message...")
+
 	# Capture message
 	SentryBridge.captureMessage("Hello from GDScript")
 
 
 func _on_capture_error_test_pressed() -> void:
+	print("Capturing error...")
+
 	# Create stacktrace data
 	var stacktrace := {
 		frames = [
