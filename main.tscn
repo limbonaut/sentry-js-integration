@@ -11,10 +11,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 72.0
-offset_top = 116.0
-offset_right = 231.0
-offset_bottom = 225.0
+offset_left = 111.0
+offset_top = 85.0
+offset_right = 640.0
+offset_bottom = 455.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -22,21 +22,43 @@ theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Sentry JS Integration"
 
 [node name="SetContextBtn" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Set context
 "
 
 [node name="CaptureMessageBtn" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Capture message"
 
 [node name="CaptureErrorTest" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Capture error"
+
+[node name="CaptureErrorThreadedTest" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Capture error (from thread)"
+
+[node name="NativeDivisionTest" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "C++ division by zero"
+
+[node name="NativeDivisionThreadedTest" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "C++ division by zero (from thread)"
 
 [connection signal="pressed" from="VBoxContainer/SetContextBtn" to="." method="_on_set_context_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/CaptureMessageBtn" to="." method="_on_capture_message_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/CaptureErrorTest" to="." method="_on_capture_error_test_pressed"]
+[connection signal="pressed" from="VBoxContainer/CaptureErrorThreadedTest" to="." method="_on_capture_error_threaded_test_pressed"]
+[connection signal="pressed" from="VBoxContainer/NativeDivisionTest" to="." method="_on_native_division_test_pressed"]
+[connection signal="pressed" from="VBoxContainer/NativeDivisionThreadedTest" to="." method="_on_native_division_threaded_test_pressed"]
