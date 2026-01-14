@@ -6,6 +6,7 @@ src/gen/
 bin/
 
 # Compiled files
+.cache
 *.bc
 *.creator
 *.creator.user
