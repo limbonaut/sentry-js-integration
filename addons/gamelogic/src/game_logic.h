@@ -22,4 +22,5 @@ protected:
 
 public:
 	void enter_crash_zone();
+	int divide(int a, int b);
 };
