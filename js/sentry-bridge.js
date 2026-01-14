@@ -4,7 +4,6 @@ window.SentryBridge = {
 			Sentry.init({
 				dsn: dsn,
 				release: release,
-				integrations: [],
 				sampleRate: 1.0,
 				debug: true,
 				enableLogs: true,
